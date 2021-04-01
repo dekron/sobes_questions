@@ -1,6 +1,6 @@
 ## Вопросы на собеседовании фронтенд разработчика React.js
 
-Здесь собраны самые популярные вопросы, задаваемые на русскоязычных собеседованиях front-end разработчиков на React.js.  Тематика вопросов включает в себя как основы JavaScript и веб-технологий так и глубокое понимание работы React.js и смежных технологий (Redux, MobX и прочего).
+Здесь собраны самые популярные вопросы, задаваемые на русскоязычных собеседованиях front-end разработчиков на React.js. Тематика вопросов включает в себя как основы JavaScript и веб-технологий так и глубокое понимание работы React.js и смежных технологий (Redux, MobX и прочего).
 
 **JavaScript**:
 
@@ -28,6 +28,32 @@
     </li>
   </ul>
   <p><i>Источник: <a href ="https://learn.javascript.ru/types-intro">learn.javascript.ru</a></i></p>
+  <p>
+    Задача:
+
+    typeof undefined // ?
+    typeof 0 // ?
+    typeof 10n // ?
+    typeof true // ?
+    typeof "foo" // ?
+    typeof Symbol("id") // ?
+    typeof Math // ?
+    typeof null // ?
+    typeof alert // ?
+
+
+    Ответы
+    typeof undefined // "undefined"
+    typeof 0 // "number"
+    typeof 10n // "bigint"
+    typeof true // "boolean"
+    typeof "foo" // "string"
+    typeof Symbol("id") // "symbol"
+    typeof Math // "object"  (1)
+    typeof null // "object"  (2)
+    typeof alert // "function"  (3)
+
+  </p>
 </div>
 </details>
 
@@ -39,6 +65,29 @@
   <p>Это по сути бесконечный цикл, в котором выполняются многочисленные обработчики событий. Если очередь пустая — движок браузера ждет, когда поступит событие. Если непустая — первое в ней событие извлекается и его обработчик начинает выполняться. И так до бесконечности.</p>
    <img src="https://cdn-images-1.medium.com/max/1600/1*quyTIOs2hioCx1jRQ7-ojw.png" />
    <p><i>Источник: <a href ="https://medium.com/@pavelbely/javascript-event-loop-%D0%B2-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0%D1%85-%D1%87%D0%B0%D1%81%D1%82%D1%8C-1-a19e4d99f242">Pavel Bely, medium.com</a></i></p>
+  <p>
+      Задача 1
+
+      setTimeout(function timeout() {
+          console.log('Таймаут');
+      }, 0);
+
+      let p = new Promise(function(resolve, reject) {
+          console.log('Создание промиса');
+          resolve();
+      });
+
+      p.then(function(){
+          console.log('Обработка промиса');
+      });
+
+      console.log('Конец скрипта');
+
+  </p>
+   <p>
+    <p>Задача 2</p>
+    <p>Написать JS класс который будет при нажатии на F1 искать под курсором значение первого элемента по иерархии вверх с атрибутом data-help и открывать ссылку в текущем окне http://localhost/?help=значение</p>
+  </p>
 </div>
 </details>
 
@@ -47,6 +96,42 @@
 <div>
   <p>Замыкание — это комбинация функции и лексического окружения, в котором эта функция была объявлена. Это окружение состоит из произвольного количества локальных переменных, которые были в области действия функции во время создания замыкания.</p>
   <p><i>Источник: <a href ="https://developer.mozilla.org/ru/docs/Web/JavaScript/Closures">developer.mozilla.org</a></i></p>
+  <p><b>Задача. </b>Напишите функцию sum, которая работает таким образом: sum(a)(b) = a+b.
+  </p>
+  <p><b>Задача 2. </b>
+  <p>У нас есть встроенный метод arr.filter(f) для массивов. Он фильтрует все элементы с помощью функции f. Если она возвращает true, то элемент добавится в возвращаемый массив.</p>
+  <p>Сделайте набор «готовых к употреблению» фильтров:</p>
+  <li> inBetween(a, b) – между a и b (включительно).</li>
+  <li> inArray([...]) – находится в данном массиве.</li>
+  <p>Они должны использоваться таким образом:</p>
+
+  <p>arr.filter(inBetween(3,6)) – выбирает только значения между 3 и 6 (включительно).</p>
+<li>arr.filter(inArray([1,2,3])) – выбирает только элементы, совпадающие с одним из элементов массива</li>
+<p>
+  Например:
+
+  /* .. ваш код для inBetween и inArray */
+  let arr = [1, 2, 3, 4, 5, 6, 7];
+
+  alert( arr.filter(inBetween(3, 6)) ); // 3,4,5,6
+
+  alert( arr.filter(inArray([1, 2, 10])) ); // 1,2
+</p>
+</p>
+<p><b>Решение.</b></p>
+  <p>
+
+    function inBetween(a, b) {
+      return function(x) {
+        return x >= a && x <= b;
+      };
+    }
+    function inArray(arr) {
+      return function(x) {
+        return arr.includes(x);
+      };
+    }
+  </p>
 </div>
 </details>
 
@@ -59,6 +144,29 @@
   <p>При создании объекта через new, в его прототип __proto__ записывается ссылка из prototype функции-конструктора.</p>
   <p>Значением Person.prototype по умолчанию является объект с единственным свойством constructor, содержащим ссылку на Person.</p>
   <p><i>Источник: <a href ="https://learn.javascript.ru/prototype">learn.javascript.ru</a></i></p>
+  <p>
+    <b>Задача</b>
+    <p>Добавьте всем функциям в прототип метод defer(ms), который возвращает обёртку, откладывающую вызов функции на ms миллисекунд.</p>
+    <p>Например, должно работать так:</p>
+  </p>
+  <p>
+
+    function f(a, b) {
+      alert( a + b );
+    }
+
+    f.defer(1000)(1, 2); // выведет 3 через 1 секунду.
+  </p>
+  <p>
+    Решение
+
+    Function.prototype.defer = function(ms) {
+      let f = this;
+      return function(...args) {
+        setTimeout(() => f.apply(this, args), ms);
+      }
+    };
+  </p>
 </div>
 </details>
 
@@ -124,6 +232,7 @@
       // resolve(результат) при успешном выполнении
       // reject(ошибка) при ошибке
     })
+
   </p>
   <p>
     Универсальный метод для навешивания обработчиков:
@@ -161,9 +270,118 @@
           alert("Rejected: " + error); // error - аргумент reject
         }
       );
-   В результате запуска кода выше – через 1 секунду выведется «Fulfilled: result».
+
+В результате запуска кода выше – через 1 секунду выведется «Fulfilled: result».
+
   </p>
   <p><i>Источник: <a href ="https://learn.javascript.ru/promise">javascript.ru</a></i></p>
+  <p>
+    <b>Задача</b>
+  </p>
+  <p>
+    Планировщик задач
+
+    interface Task {
+      targetId: number
+      action: 'init' | 'prepare' | 'work' | 'finalize' | 'cleanup'
+    }
+
+    // есть специальный класс который умеет выполнять одну задачу
+    // Executor.executeTask(task: Task): Promise<void>
+
+    // Надо реализовать асинхронную функцию, которая получает на
+    // вход очередь задач Task[] и максимальное кол-во 
+    // одновременных "потоков" maxThreads и возвращает промис,
+    // который будет разрезолвлен, когде все задачи отработают.
+
+    async function run(queue: Queue, maxThreads = 0): Promise<void>
+
+    // При maxThreads == 0 ограничения на кол-во одновременных "потоков" нету.
+
+    // Основная сложность заключается в том, что в один момент 
+    // времени Executor не может исполнять несколько разных задач 
+    // с одним и тем же Task.targetId, но при этом он может 
+    // исполнять много разных задач с разными Task.targetId 
+    // параллельно.
+
+    // Например, если мы вызовем
+    executor.executeTask({ targetId: 0, action: 'init' });
+    executor.executeTask({ targetId: 0, action: 'prepare' });
+    // то, второй вызов кинет исключение.
+
+    // При этом
+    await executor.executeTask({ targetId: 0, action: 'init' });
+    await executor.executeTask({ targetId: 1, action: 'prepare' });
+    // отработает нормально
+    
+    // Все задачи для одного и того же Task.targetId должны быть 
+    // исполнены последовательно в том порядке, в котором они 
+    // находятся в очереди.
+
+    import Task from './Task';
+    import Executor from './Executor';
+
+    type Queue = Task[];
+
+    export default async function run(queue: Queue, maxThreads = 0): Promise<void>
+    {
+        const executor = new Executor();
+        executor.start();
+
+        /**
+        * Код надо писать сюда
+        * Тут что-то вызываем в правильном порядке executor.executeTask для тасков из очереди queue
+        */
+
+        // здесь
+
+        /**
+        * Конец реализации
+        */
+
+        executor.stop();
+    }
+  </p>
+  <p>
+    Код примерного ответа
+
+    let runningPromises: Promise<void>[] = [];
+    const currentQueue = [...queue];
+
+    while (currentQueue.length > 0) {
+        let qIdx = 0;
+        while (qIdx < currentQueue.length) {
+            const task = currentQueue[qIdx];
+
+            // Если превышено количество тредов
+            if (maxThreads > 0 && runningPromises.length >= maxThreads) {
+                break;
+            }
+
+            // Если задача уже запущена для этого id
+            if (executor.executeData.running[task.targetId]) {
+                // Переходим к следующей задаче
+                qIdx++;
+            }
+            else {
+                // Запустить задачу
+                currentQueue.splice(qIdx, 1);
+                const promise = executor.executeTask(task).then(() => {
+                    // Задача выполнена, удалить из списка
+                    runningPromises = runningPromises.filter(p => p !== promise);
+                });
+                runningPromises.push(promise);
+            }
+        }
+
+        // Ждём, пока завершится хотя бы одна задача
+        await Promise.race(runningPromises);
+    }
+
+    // Дождаться завершения оставшихся задач
+    await Promise.all(runningPromises);
+  
+  <p>
 </div>
 </details>
 
@@ -184,6 +402,7 @@
 
       let r = new Repo();
       console.log(r.getName()) // необработанная ошибка TypeError: r.getName не является функцией
+
    </p>
     <p>
       Cтатические методы вызываются через имя класса. Вызывать статические методы через имя объекта запрещено. Статические методы часто используются для создания вспомогательных функций приложения.
@@ -219,6 +438,7 @@
     alert( map.get('1') ); // 'str1'
 
     alert( map.size ); // 3
+
   </p>
   <p>
     Set – коллекция для хранения множества значений, причём каждое значение может встречаться лишь один раз. Например, к нам приходят посетители, и мы хотели бы сохранять всех, кто пришёл. При этом повторные визиты не должны приводить к дубликатам, то есть каждого посетителя нужно «посчитать» ровно один раз. Set для этого отлично подходит:
@@ -244,6 +464,7 @@
     alert( set.size ); // 3
 
     set.forEach( user => alert(user.name ) ); // Вася, Петя, Даша
+
   </p>
   <p>
     WeakSet – особый вид Set, не препятствующий сборщику мусора удалять свои элементы. 
@@ -277,6 +498,7 @@
     activeUsers.splice(0, 1); // Петя более не активный пользователь
 
     // weakMap теперь содержит только 1 элемент
+
   </p>
   <p><i>Источник: <a href ="https://learn.javascript.ru/set-map">javascript.ru</a></i></p>
 </div>
@@ -392,6 +614,7 @@
         return <Button theme={this.context} />;
       }
     }
+
   </p>
   <p>Обычно контекст используется, если необходимо обеспечить доступ данных во многих компонентах на разных уровнях вложенности. По возможности не используйте его, так как это усложняет переиспользование компонентов.</p>
   <ul>
@@ -479,7 +702,6 @@
 </div>
 </details>
 
-
 <details>
 <summary>В чем разница между управляемыми (controlled) и не управляемыми (uncontrolled) компонентами?</summary>
 <div>
@@ -520,6 +742,7 @@
         );
       }
     }
+
   </p>
   <p>
     Неуправляемые компоненты опираются на DOM в качестве источника данных и могут быть удобны при интеграции React с кодом, не связанным с React. Количество кода может уменьшиться, правда, за счёт потери в его чистоте. Поэтому в обычных ситуациях мы рекомендуем использовать управляемые компоненты.
@@ -545,7 +768,6 @@
 </div>
 </details>
 
-
 <details>
 <summary>Что такое Компонент высшего порядка (Higher-Order Component, HOC)?</summary>
 <div>
@@ -554,6 +776,7 @@
     Говоря просто, компонент высшего порядка — это функция, которая принимает компонент и возвращает новый компонент. HOC часто встречаются в сторонних библиотеках, например connect в Redux и createFragmentContainer в Relay.
 
     const EnhancedComponent = higherOrderComponent(WrappedComponent);
+
   </p>
   <p>
     Давайте реализуем функцию withSubscription — она будет создавать компоненты и подписывать их на обновления DataSource (наподобие CommentList и BlogPost). Функция будет принимать оборачиваемый компонент и через пропсы передавать ему новые данные:
@@ -567,6 +790,7 @@
       BlogPost,
       (DataSource, props) => DataSource.getBlogPost(props.id)
     );
+
   </p>
   <p>
     Первый параметр — это оборачиваемый компонент. Второй — функция, которая извлекает нужные нам данные, она получает DataSource и текущие пропсы.
@@ -603,8 +827,9 @@
           </div>
         );
       }
-    
-   Вызов useState возвращает две вещи: текущее значение состояния и функцию для его обновления. Эту функцию можно использовать где угодно, например, в обработчике событий. Она схожа с this.setState в классах, но не сливает новое и старое состояние вместе. Единственный аргумент useState — это начальное состояние. В примере выше — это 0, так как наш счётчик начинается с нуля.
+
+Вызов useState возвращает две вещи: текущее значение состояния и функцию для его обновления. Эту функцию можно использовать где угодно, например, в обработчике событий. Она схожа с this.setState в классах, но не сливает новое и старое состояние вместе. Единственный аргумент useState — это начальное состояние. В примере выше — это 0, так как наш счётчик начинается с нуля.
+
   </p>
   <p>
     Хук эффекта - useEffect
@@ -629,8 +854,9 @@
         </div>
       );
     }
-   
-   Когда вы вызываете useEffect, React получает указание запустить вашу функцию с «эффектом» после того, как он отправил изменения в DOM. Поскольку эффекты объявляются внутри компонента, у них есть доступ к его пропсам и состоянию. По умолчанию, React запускает эффекты после каждого рендера, включая первый рендер.
+
+Когда вы вызываете useEffect, React получает указание запустить вашу функцию с «эффектом» после того, как он отправил изменения в DOM. Поскольку эффекты объявляются внутри компонента, у них есть доступ к его пропсам и состоянию. По умолчанию, React запускает эффекты после каждого рендера, включая первый рендер.
+
   </p>
   <p><i>Источник: <a href ="https://ru.reactjs.org/docs/hooks-overview.html">ru.reactjs.org</a></i></p>
 </div>
@@ -644,6 +870,7 @@
     Порталы позволяют рендерить дочерние элементы в DOM-узел, который находится вне DOM-иерархии родительского компонента.
 
     ReactDOM.createPortal(child, container)
+
   </p>
   <p>
     Первый аргумент (child) — это любой React-компонент, который может быть отрендерен, такой как элемент, строка или фрагмент. Следующий аргумент (container) — это DOM-элемент.
@@ -694,7 +921,7 @@
 
 <br/>
 
-**Redux и MobX**:
+**Redux**:
 
 <details>
   <summary>Что такое Redux?</summary>
@@ -844,8 +1071,9 @@
       Куки можно создавать через JavaScript при помощи свойства Document.cookie. Если флаг HttpOnly не установлен, то и доступ к существующим cookies можно получить через JavaScript.
     </p>
 
-      document.cookie = "yummy_cookie=choco"; 
+      document.cookie = "yummy_cookie=choco";
       document.cookie = "tasty_cookie=strawberry";
+
    <p><i>Источник: <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/%D0%9A%D1%83%D0%BA%D0%B8">developer.mozilla.org</a></i></p>
   </div>
 </details>
@@ -944,6 +1172,7 @@
           plugins
         };
       }
+
    </p>
     <p>
      <i>
@@ -1042,7 +1271,7 @@
         Custom Elements — API для создания собственных HTML элементов.
       </li>
       <li>
-        HTML Templates — тег <template> позволяет реализовывать изолированные DOM-элементы.
+        HTML Templates — тег template позволяет реализовывать изолированные DOM-элементы.
       </li>
       <li>
         Shadow DOM — изолирует DOM и стили в разных элементах.
@@ -1057,5 +1286,49 @@
         <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%B1-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B">wikipedia.org</a>
      </i>
     </p>
+  </div>
+</details>
+
+<br/>
+
+**Typescript**:
+
+<details>
+  <summary>Как перегрузить функцию?</summary>
+  <div>
+    <p>Cнова используйте то же имя функции над исходной функцией без скобок {}. Измените количество аргументов, типы аргументов или / и тип возвращаемого значения.
+    </p>
+  </div>
+</details>
+
+<details>
+  <summary>Как быстро сделать все свойства в интерфейсе опциональными?</summary>
+  <div>
+    <p>Используйте тип `Partial`.
+    </p>
+  </div>
+</details>
+
+<details>
+  <summary>Что делает вспомогательный тип `Omit` ?</summary>
+  <div>
+    <p>Вы можете указать свойства которые будут исключены из родительского типа.
+    </p>
+  </div>
+</details>
+
+<details>
+  <summary>Что такое дженерики(generics) ? Как их использовать?</summary>
+  <div>
+    <p>Generic-это некоторый обобщенный тип, который может быть заменен любым конкретным типом, таким как string или number. Универсальные шаблоны позволяют писать универсальные функции, с сохранностью типа, без использования "любого" типа. Существуют универсальные функции, классы или интерфейсы, например, можно написать класс Container-T-, который реализует базовые операции сбора, независимо от типа хранимых элементов.
+    </p>
+    <p>
+    
+    function loggingObject<T>(arg: T): T {
+      console.log(arg.toString());
+      return arg;
+    }
+
+  </p>
   </div>
 </details>
