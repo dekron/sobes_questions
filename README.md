@@ -1343,7 +1343,6 @@
 	       const aa = setTimeout(() => console.log(n), 10 + n)
 	}
 	// Что будет выведено в консоль?
-	
 	</p>
   </div>
 </details>
