@@ -1330,3 +1330,14 @@
   </p>
   </div>
 </details>
+
+
+
+
+Задача 01.
+let n = 0
+while (++n < 5) {
+	const aa = setTimeout(() => console.log(n), 10 + n)
+}
+// Что будет выведено в консоль?
+
