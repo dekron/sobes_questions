@@ -1333,11 +1333,15 @@
 
 
 
-
-Задача 01.
-let n = 0
-while (++n < 5) {
-	const aa = setTimeout(() => console.log(n), 10 + n)
-}
-// Что будет выведено в консоль?
-
+<details>
+  <summary>Задача 01.</summary>
+  <div>
+	<p>
+	let n = 0
+	while (++n < 5) {
+		const aa = setTimeout(() => console.log(n), 10 + n)
+	}
+	// Что будет выведено в консоль?
+	</p>
+  </div>
+</details>
